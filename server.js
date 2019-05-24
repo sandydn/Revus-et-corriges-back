@@ -12,20 +12,20 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/Admin", Admin)
-app.use("./Cinema", Cinema)
-app.use("./CinemaHasDistributeurEditeur", CinemaHasDistributeurEditeur)
-app.use("./CinemaHasLieux", CinemaHasLieux)
-app.use("./CinemaHasRealisateurs", CinemaHasRealisateurs)
-app.use("./Decoration", Decoration)
-app.use("./DistributeurEditeur", DistributeurEditeur)
-app.use("./Events", Events)
-app.use("./EventsHasLieux", EventsHasLieux)
-app.use("./EventsHasRealisateurs", EventsHasRealisateurs)
-app.use("./Lieux", Lieux)
-app.use("./Realisateurs", Realisateurs)
-app.use("./Video", Video)
-app.use("./VideoHasRealisateurs", VideoHasRealisateurs)
+app.use("/Admin", routes.Admin)
+app.use("./Cinema", routes.Cinema)
+app.use("./CinemaHasDistributeurEditeur", routes.CinemaHasDistributeurEditeur)
+app.use("./CinemaHasLieux", routes.CinemaHasLieux)
+app.use("./CinemaHasRealisateurs", routes.CinemaHasRealisateurs)
+app.use("./Decoration", routes.Decoration)
+app.use("./DistributeurEditeur", routes.DistributeurEditeur)
+app.use("./Events", routes.Events)
+app.use("./EventsHasLieux", routes.EventsHasLieux)
+app.use("./EventsHasRealisateurs", routes.EventsHasRealisateurs)
+app.use("./Lieux", routes.Lieux)
+app.use("./Realisateurs", routes.Realisateurs)
+app.use("./Video", routes.Video)
+app.use("./VideoHasRealisateurs", routes.VideoHasRealisateurs)
 
 
 

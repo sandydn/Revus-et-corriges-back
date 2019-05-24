@@ -3,7 +3,7 @@ const express = require ("express")
 const router = express.Router()
 
 router.get('/adminform/eventsHasRealisateurs', (req, res) => {
-    connexion.query('SELECT * FROM eventsHasRealisateurs', (err, results) => {
+    connection.query('SELECT * FROM eventsHasRealisateurs', (err, results) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération de l\'élément');
         } else {
@@ -14,7 +14,7 @@ router.get('/adminform/eventsHasRealisateurs', (req, res) => {
 
 router.post('/adminform/eventsHasRealisateurs', (req, res) => {
     const formData = req.body;
-    connexion.query('INSERT INTO eventsHasRealisateurs SET ?', formData ,(err, results) => {
+    connection.query('INSERT INTO eventsHasRealisateurs SET ?', formData ,(err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send ('Erreur lors de l\'enregistrement de l\'élément');

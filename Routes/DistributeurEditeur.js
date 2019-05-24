@@ -4,7 +4,7 @@ const router = express.Router()
 
 
 router.get('/adminform/distributeurEditeur', (req, res) => {
-    connexion.query('SELECT * FROM distributeurEditeur', (err, results) => {
+    connection.query('SELECT * FROM distributeurEditeur', (err, results) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération de l\'élément');
         } else {
@@ -15,7 +15,7 @@ router.get('/adminform/distributeurEditeur', (req, res) => {
 
 router.post('/adminform/distributeurEditeur', (req, res) => {
     const formData = req.body;
-    connexion.query('INSERT INTO distributeurEditeur SET ?', formData, (err, results) => {
+    connection.query('INSERT INTO distributeurEditeur SET ?', formData, (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send ('Erreur lors de l\'enregistrement de l\'élément');
