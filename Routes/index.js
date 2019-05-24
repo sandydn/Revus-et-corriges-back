@@ -1,0 +1,16 @@
+const Admin = require("./Admin")
+const Cinema = require("./Cinema")
+const CinemaHasDistributeurEditeur = require("./CinemaHasDistributeurEditeur")
+const CinemaHasLieux = require("./CinemaHasLieux")
+const CinemaHasRealisateurs = require("./CinemaHasRealisateurs")
+const Decoration = require("./Decoration")
+const DistributeurEditeur = require("./DistributeurEditeur")
+const Events = require("./Events")
+const EventsHasLieux = require("./EventsHasLieux")
+const EventsHasRealisateurs = require("./EventsHasRealisateurs")
+const Lieux = require("./Lieux")
+const Realisateurs = require("./Realisateurs")
+const Video = require("./Video")
+const VideoHasRealisateurs = require("./VideoHasRealisateurs")
+
+module.exports = {Admin, Cinema, CinemaHasDistributeurEditeur, CinemaHasLieux, CinemaHasRealisateurs, Decoration, DistributeurEditeur, Events, EventsHasLieux, EventsHasRealisateurs, Lieux, Realisateurs, Video, VideoHasRealisateurs }
