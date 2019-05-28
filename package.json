@@ -1,0 +1,25 @@
+{
+  "name": "lechaudarcalendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "conf.js",
+  "dependencies": {
+    "mysql": "^2.17.1",
+    "nodemon": "^1.19.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WildCodeSchool/paris-0219-js-revusEtCorriges-back/"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WildCodeSchool/paris-0219-js-revusEtCorriges-back/issues"
+  },
+  "homepage": "https://github.com/WildCodeSchool/paris-0219-js-revusEtCorriges-back#readme"
+}
