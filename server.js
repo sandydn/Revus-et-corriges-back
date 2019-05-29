@@ -1,17 +1,19 @@
-//const connexion = require('./conf');
+const connection = require('./conf');
 const express = require('express');
+const cors = require('cors')
+const app = express();
 const routes = require('./Routes/index')
 const bodyParser = require('body-parser');
-const app = express();
 const port = 4242;
 
 
-app.use(bodyParser.json());
 // Support URL-encoded bodies
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
+app.use(bodyParser.json());
 
+app.use(cors())
 
 
 
@@ -19,7 +21,7 @@ app.use("/a1", routes.Acteurs)
 app.use("/a2", routes.ActeursHasCinema)
 app.use("/a3", routes.ActeursHasEvents)
 app.use("/a4", routes.ActeurHasRealisateurs)
-app.use("/a5", routes.ActeurHasVideo)
+app.use("/a5", routes.ActeursHasVideo)
 app.use("/a6", routes.Admin)
 app.use("/a7", routes.Cinema)
 app.use("/a8", routes.CinemaHasDistributeurEditeur)
@@ -41,7 +43,7 @@ app.use("/a23", routes.Realisateurs)
 app.use("/a24", routes.Video)
 app.use("/a25", routes.VideoEditeur)
 app.use("/a26", routes.VideoHasRealisateurs)
-
+ 
 
 
 
