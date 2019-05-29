@@ -1,7 +1,11 @@
 const express = require ("express")
+const connection = require('../conf');
 
 const router = express.Router()
 
+router.get("/", (req, res) => {
+    console.log('cinemaHasRealisateurs')
+})
 
 router.get('/cinemaHasRealisateurs', (req, res) => {
     connection.query('SELECT * FROM cinemaHasRealisateurs', (err, results) => {

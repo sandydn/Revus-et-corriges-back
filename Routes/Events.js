@@ -1,4 +1,5 @@
 const express = require ("express")
+const connection = require('../conf');
 
 const router = express.Router()
 
@@ -27,7 +28,7 @@ router.post('/events', (req, res) => {
 router.put('/events/:id', (req, res) => {
     const idCalendar = req.params.id;
     const formData = req.body;
-    connection.query('UPDATE events SET ? WHERE id = ?', [formData, idCalendar], err => {
+    connection.query('UPDATE events SET ? WHERE idEvent = ?', [formData, idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification de l\'événement");
@@ -39,7 +40,7 @@ router.put('/events/:id', (req, res) => {
 
 router.delete('/events/:id', (req, res) => {
     const idCalendar = req.params.id;
-    connection.query('DELETE FROM events WHERE id = ?', [idCalendar], err => {
+    connection.query('DELETE FROM events WHERE idEvent = ?', [idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la suppression de l\'événement");

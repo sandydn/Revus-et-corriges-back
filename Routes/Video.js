@@ -1,4 +1,5 @@
 const express = require ("express")
+const connection = require('../conf');
 
 const router = express.Router()
 
@@ -28,7 +29,7 @@ router.post('/video', (req, res) => {
 router.put('/video/:id', (req, res) => {
     const idCalendar = req.params.id;
     const formData = req.body;
-    connection.query('UPDATE video SET ? WHERE id = ?', [formData, idCalendar], err => {
+    connection.query('UPDATE video SET ? WHERE idVideo = ?', [formData, idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification de l\'élément");
@@ -40,7 +41,7 @@ router.put('/video/:id', (req, res) => {
 
 router.delete('/video/:id', (req, res) => {
     const idCalendar = req.params.id;
-    connection.query('DELETE FROM video WHERE id = ?', [idCalendar], err => {
+    connection.query('DELETE FROM video WHERE idVideo = ?', [idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la suppression de l\'élément");

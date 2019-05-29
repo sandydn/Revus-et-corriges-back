@@ -1,7 +1,12 @@
 const express = require ("express")
+const connection = require('../conf');
 
 const router = express.Router()
 
+
+router.get("/", (req, res) => {
+    console.log('realisateur')
+})
 
 router.get('/realisateurs', (req, res) => {
     connection.query('SELECT * FROM realisateurs', (err, results) => {

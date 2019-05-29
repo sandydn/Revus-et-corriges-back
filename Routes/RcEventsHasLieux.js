@@ -1,9 +1,15 @@
 const express = require ("express")
+const connection = require('../conf');
 
 const router = express.Router()
 
-router.get('/RcEventsHasLieux', (req, res) => {
-    connection.query('SELECT * FROM RcEventsHasLieux', (err, results) => {
+
+router.get("/", (req, res) => {
+    console.log('eeeeeeeEEEEEEEEEEEEEEEEEEEEEE')
+})
+
+router.get('/rcEventsHasLieux', (req, res) => {
+    connection.query('SELECT * FROM rcEventsHasLieux', (err, results) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération des informations');
         } else {
@@ -12,9 +18,9 @@ router.get('/RcEventsHasLieux', (req, res) => {
     })
 })
 
-router.post('/RcEventsHasLieux', (req, res) => {
+router.post('/rcEventsHasLieux', (req, res) => {
     const formData = req.body;
-    connection.query('INSERT INTO RcEventsHasLieux SET ?', formData, (err, results) => {
+    connection.query('INSERT INTO rcEventsHasLieux SET ?', formData, (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send ('Erreur lors de l\'enregistrement de l\'élément');
