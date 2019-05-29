@@ -2,7 +2,7 @@ const express = require ("express")
 
 const router = express.Router()
 
-router.get('/adminform/decoration', (req, res) => {
+router.get('/decoration', (req, res) => {
     connection.query('SELECT * FROM decoration', (err, results) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération de la décoration');
@@ -12,7 +12,7 @@ router.get('/adminform/decoration', (req, res) => {
     })
 })
 
-router.post('/adminform/decoration', (req, res) => {
+router.post('/decoration', (req, res) => {
     const formData = req.body;
 
     connection.query('INSERT INTO decoration SET ?', formData, (err, results) => {
@@ -25,7 +25,7 @@ router.post('/adminform/decoration', (req, res) => {
     })
 })
 
-router.put('/adminform/decoration/:id', (req, res) => {
+router.put('/decoration/:id', (req, res) => {
     const idCalendar = req.params.id;
     const formData = req.body;
     connection.query('UPDATE decoration SET ? WHERE id = ?', [formData, idCalendar], err => {

@@ -12,20 +12,36 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/Admin", routes.Admin)
-app.use("./Cinema", routes.Cinema)
-app.use("./CinemaHasDistributeurEditeur", routes.CinemaHasDistributeurEditeur)
-app.use("./CinemaHasLieux", routes.CinemaHasLieux)
-app.use("./CinemaHasRealisateurs", routes.CinemaHasRealisateurs)
-app.use("./Decoration", routes.Decoration)
-app.use("./DistributeurEditeur", routes.DistributeurEditeur)
-app.use("./Events", routes.Events)
-app.use("./EventsHasLieux", routes.EventsHasLieux)
-app.use("./EventsHasRealisateurs", routes.EventsHasRealisateurs)
-app.use("./Lieux", routes.Lieux)
-app.use("./Realisateurs", routes.Realisateurs)
-app.use("./Video", routes.Video)
-app.use("./VideoHasRealisateurs", routes.VideoHasRealisateurs)
+
+
+
+app.use("/a1", routes.Acteurs)
+app.use("/a2", routes.ActeursHasCinema)
+app.use("/a3", routes.ActeursHasEvents)
+app.use("/a4", routes.ActeurHasRealisateurs)
+app.use("/a5", routes.ActeurHasVideo)
+app.use("/a6", routes.Admin)
+app.use("/a7", routes.Cinema)
+app.use("/a8", routes.CinemaHasDistributeurEditeur)
+app.use("/a9", routes.CinemaHasLieux)
+app.use("/a10", routes.CinemaHasRealisateurs)
+app.use("/a11", routes.Decoration)
+app.use("/a12", routes.DistributeurEditeur)
+app.use("/a13", routes.Events)
+app.use("/a14", routes.EventsHasLieux)
+app.use("/a15", routes.EventsHasRealisateurs)
+app.use("/a16", routes.Importance)
+app.use("/a17", routes.Lieux)
+app.use("/a18", routes.RcEvents)
+app.use("/a19", routes.RcEventsHasActeurs)
+app.use("/a20", routes.RcEventsHasCinema)
+app.use("/a21", routes.RcEventsHasLieux)
+app.use("/a22", routes.RcEventsHasRealisateurs)
+app.use("/a23", routes.Realisateurs)
+app.use("/a24", routes.Video)
+app.use("/a25", routes.VideoEditeur)
+app.use("/a26", routes.VideoHasRealisateurs)
+
 
 
 

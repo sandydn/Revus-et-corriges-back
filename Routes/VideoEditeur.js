@@ -2,20 +2,19 @@ const express = require ("express")
 
 const router = express.Router()
 
-
-router.get('/video', (req, res) => {
-    connection.query('SELECT * FROM video', (err, results) => {
+router.get('/videoEditeur', (req, res) => {
+    connection.query('SELECT * FROM videoEditeur', (err, results) => {
         if (err) {
-            res.status(500).send('Erreur lors de la récupération de l\'élément');
+            res.status(500).send('Erreur lors de la récupération des informations');
         } else {
             res.json (results);
         }
     })
 })
 
-router.post('/video', (req, res) => {
+router.post('/videoEditeur', (req, res) => {
     const formData = req.body;
-    connection.query('INSERT INTO video SET ?', formData, (err, results) => {
+    connection.query('INSERT INTO videoEditeur SET ?', formData, (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send ('Erreur lors de l\'enregistrement de l\'élément');
@@ -25,10 +24,10 @@ router.post('/video', (req, res) => {
     })
 })
 
-router.put('/video/:id', (req, res) => {
+router.put('/videoEditeur/:id', (req, res) => {
     const idCalendar = req.params.id;
     const formData = req.body;
-    connection.query('UPDATE video SET ? WHERE id = ?', [formData, idCalendar], err => {
+    connection.query('UPDATE videoEditeur SET ? WHERE id = ?', [formData, idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification de l\'élément");
@@ -38,9 +37,9 @@ router.put('/video/:id', (req, res) => {
     });
 });
 
-router.delete('/video/:id', (req, res) => {
+router.delete('/videoEditeur/:id', (req, res) => {
     const idCalendar = req.params.id;
-    connection.query('DELETE FROM video WHERE id = ?', [idCalendar], err => {
+    connection.query('DELETE FROM videoEditeur WHERE id = ?', [idCalendar], err => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la suppression de l\'élément");
@@ -49,5 +48,6 @@ router.delete('/video/:id', (req, res) => {
         }
     })
 })
+
 
 module.exports = router
