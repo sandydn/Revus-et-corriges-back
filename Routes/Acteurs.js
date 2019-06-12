@@ -20,9 +20,9 @@ router.post('/acteurs', function (req, res) {
     connection.beginTransaction( function (err) {
         
         if(err) { throw err}
-        connection.query('INSERT INTO acteurs SET ?', formData, function (err, results) {
+        connection.query('INSERT INTO acteurs SET ?', formData, (err, results) => {
             if (err) {
-                return connection.rollback( function() {                    
+                return connection.rollback( _ =>{                    
                     throw err
                 })
             } else {
