@@ -4,6 +4,7 @@ const ActeursHasEvents = require("./ActeursHasEvents")
 const ActeurHasRealisateurs = require("./ActeursHasRealisateurs")
 const ActeursHasVideo = require("./ActeursHasVideo")
 const Admin = require("./Admin")
+const Auth = require("../auth/AuthController")
 const Cinema = require("./Cinema")
 const CinemaHasDistributeurEditeur = require("./CinemaHasDistributeurEditeur")
 const CinemaHasLieux = require("./CinemaHasLieux")
@@ -25,13 +26,15 @@ const Video = require("./Video")
 const VideoEditeur = require("./VideoEditeur")
 const VideoHasRealisateurs = require("./VideoHasRealisateurs")
 
+
 module.exports = {
     Acteurs, 
     ActeursHasCinema, 
     ActeursHasEvents, 
     ActeurHasRealisateurs,
     ActeursHasVideo,
-    Admin, 
+    Admin,
+    Auth, 
     Cinema, 
     CinemaHasDistributeurEditeur, 
     CinemaHasLieux, 
