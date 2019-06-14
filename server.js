@@ -5,17 +5,17 @@ const routes = require('./Routes/index')
 const bodyParser = require('body-parser');
 const port = 4242;
 
+require('dotenv').config();
 
-// Support URL-encoded bodies
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
 
+
 app.use(cors())
 
-
-
+app.use('/auth', routes.Auth);
 app.use("/a1", routes.Acteurs)
 app.use("/a2", routes.ActeursHasCinema)
 app.use("/a3", routes.ActeursHasEvents)
@@ -42,9 +42,6 @@ app.use("/a23", routes.Realisateurs)
 app.use("/a24", routes.Video)
 app.use("/a25", routes.VideoEditeur)
 app.use("/a26", routes.VideoHasRealisateurs)
- 
-
-
 
 
 app.listen(port, (err) => {
