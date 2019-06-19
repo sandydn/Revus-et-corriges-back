@@ -3,7 +3,7 @@ const cors = require('cors')
 const app = express();
 const routes = require('./Routes/index')
 const bodyParser = require('body-parser');
-const port = 4010;
+const port = 4000;
 
 
 // Support URL-encoded bodies

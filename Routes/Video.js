@@ -1,4 +1,4 @@
-const express = require ("express")
+const express = require("express")
 const connection = require('../conf');
 
 const router = express.Router()
@@ -9,7 +9,7 @@ router.get('/video', (req, res) => {
         if (err) {
             res.status(500).send('Erreur lors de la récupération de l\'élément');
         } else {
-            res.json (results);
+            res.json(results);
         }
     })
 })
@@ -21,92 +21,97 @@ router.post('/video', (req, res) => {
     const formDataEdit = req.body.distributeurEditeur;
     const joinObject = {}
 
-    connection.beginTransaction( function (err) {
+    connection.beginTransaction(function (err) {
 
-        if(err) { throw err }
+        if (err) { throw err }
 
-        connection.query('INSERT INTO importance SET ?', formDataImp, (err,results) => {
-            if(err) {
-                return connection.rollback(_=> {
-                    res
-                    .status(500)
-                    .send("error")
-                    throw err
-                })
-            } 
-        })
-        connection.query('INSERT INTO video SET ?', formDataVideo, (err, results) => {
+        connection.query('INSERT INTO importance SET ?', formDataImp, (err, results) => {
             if (err) {
-                return connection.rollback( _=> {
-                    res 
-                    .status(500)
-                    .send(" error 1")
+                return connection.rollback(_ => {
+                    res
+                        .status(500)
+                        .send("error")
                     throw err
                 })
             } else {
-               joinObject.video_idVideo = results.insertId
+                joinObject.importance_idImportance = results.insertId
+            }
+        })
+        
+        console.log(req.body);
+        connection.query('INSERT INTO video SET ?', formDataVideo, (err, results) => {
+            
+            if (err) {
+                return connection.rollback(_ => {
+                    res
+                    .status(500)
+                    .send(" erreur lors de l'insertion video")
+                    throw err
+                })
+            } else {
+                console.log("try");
+                joinObject.video_idVideo = results.insertId
 
-               connection.query('SELECT * FROM realisateurs', formDataReal, (err, results) => {
-                
-                const real = results.filter(result => result.name == formDataReal.name)
+                connection.query('SELECT * FROM realisateurs', formDataReal, (err, results) => {
 
-                console.log(real.length)
-                if (real.length !== 0) {
-                       joinObject.realisateurs_idRealisateurs = results
+                    const real = results.filter(result => result.name == formDataReal.name)
 
-                   } else {
-                       console.log('allo');
-                       
-                       connection.query('INSERT INTO realisateurs SET ?', formDataReal, (err, results) => {
-                           if (err) {
-                               return connection.rollback( _=> {
-                                res 
-                                .status(500)
-                                .send(" error 2")
+                    console.log(real.length)
+                    if (real.length !== 0) {
+                        joinObject.realisateurs_idRealisateurs = results
+
+                    } else {
+
+                        connection.query('INSERT INTO realisateurs SET ?', formDataReal, (err, results) => {
+                            if (err) {
+                                return connection.rollback(_ => {
+                                    res
+                                        .status(500)
+                                        .send(" error realisateur")
+                                    throw err
+                                })
+                            }
+                        })
+                    
+                        connection.query('SELECT * FROM distributeurEditeur', formDataEdit, (err, results) => {
+
+                            const edit = results.filter(result => result.name == formDataEdit.name)
+
+                            console.log(edit.length)
+                            if (edit.length !== 0) {
+                                joinObject.distributeurEditeur_idDistributeurEditeur = results
+
+                            } else {
+                                console.log("yes")
+                                connection.query('INSERT INTO distributeurEditeur SET ?', formDataEdit, (err, results) => {
+                                    if (err) {
+                                        return connection.rollback(_ => {
+                                            res
+                                                .status(500)
+                                                .send(" error distrib")
+                                            throw err
+                                        })
+                                    }
+                                })
+                            }
+                        })
+
+                    }
+                    connection.commit((err) => {
+                        if (err) {
+                            return connection.rollback(_ => {
+                                res
+                                    .status(500)
+                                    .send(" error 3")
                                 throw err
-                               } )
-                           }
-                       })
-                       console.log("maybe")
-                       connection.query('SELECT * FROM distributeurEditeur', formDataEdit, (err, results) => {
-
-                        const edit = results.filter(result => result.name == formDataEdit.name)
-                        
-                        console.log(edit.length)
-                        if (edit.length !==0) {
-                            joinObject.distributeurEditeur_idDistributeurEditeur = results
-
-                        } else {
-                            console.log("yes")
-                         connection.query('INSERT INTO distributeurEditeur SET ?', formDataEdit, (err, results) => {
-                             if (err) {
-                                 return connection.rollback( _=> {
-                                     res 
-                                     .status(500)
-                                     .send(" error 2")
-                                     throw err
-                                    } )
-                             }
-                         })
+                            })
                         }
                     })
-                       
-                   }
-                   connection.commit((err) => {
-                       if (err) {
-                           return connection.rollback( _=> {
-                            res 
-                            .status(500)
-                            .send(" error 3")
-                            throw err
-                           })
-                       }
-                   })
-                   res.status(200).json({results: "send"})
-               })
+                    res.status(200).json({ results: "send" })
+                })
             }
-            // connection.end()
-            
+            /*              connection.end()
+             */
         })
     })
 })
@@ -114,7 +119,7 @@ router.post('/video', (req, res) => {
 router.put('/video/:id', (req, res) => {
     const idCalendar = req.params.id;
     const formData = req.body;
-    connection.query('UPDATE video SET ? WHERE idVideo = ?', [formData, idCalendar], err => {
+    connection.query('UPDATE video SET ? WHERE idVideo = ?', [formData, idCalendar], (err, results) => {
         if (err) {
             console.log(err);
             res.status(500).send("Erreur lors de la modification de l\'élément");
@@ -132,7 +137,7 @@ router.delete('/video/:id', (req, res) => {
             res.status(500).send("Erreur lors de la suppression de l\'élément");
         } else {
             res.sendStatus(200);
-        }
+        }p
     })
 })
 
