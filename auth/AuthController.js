@@ -18,8 +18,9 @@ router.post('/register', (req, res) => {
   //Paswword crypting
   const hashedPassword = bcrypt.hashSync(req.body.admin_password, 8);
 
-  const values = [req.body.admin_email, hashedPassword]
-  connection.query('INSERT INTO admin (admin_email, admin_password) VALUES (?,?)', values, (err, user) => {
+  const values = [req.body.admin_email, hashedPassword, req.body.name]
+  connection.query('INSERT INTO admin (admin_email, admin_password,name) VALUES (?,?,?)', values, (err, user) => {
+    console.log(req.body)
     if (err) return res.status(500).send("There was a problem registering the user.")
     // create a token
     const token = jwt.sign({ id: user._id }, config.secret, {
