@@ -29,18 +29,16 @@ router.post('/video', (req, res) => {
             if (err) {
                 return connection.rollback(_ => {
                     res
-                        .status(500)
-                        .send("error")
-                    throw err
+                    .status(500)
+                    .send("error from importance")
+                throw err
                 })
             } else {
                 joinObject.importance_idImportance = results.insertId
             }
         })
         
-        console.log(req.body);
-        connection.query('INSERT INTO video SET ?', formDataVideo, (err, results) => {
-            
+        connection.query('INSERT INTO video SET ?', formDataVideo, (err, results) => {            
             if (err) {
                 return connection.rollback(_ => {
                     res
@@ -49,26 +47,23 @@ router.post('/video', (req, res) => {
                     throw err
                 })
             } else {
-                console.log("try");
                 joinObject.video_idVideo = results.insertId
 
                 connection.query('SELECT * FROM realisateurs', formDataReal, (err, results) => {
 
                     const real = results.filter(result => result.name == formDataReal.name)
 
-                    console.log(real.length)
                     if (real.length !== 0) {
                         joinObject.realisateurs_idRealisateurs = results
 
                     } else {
-
                         connection.query('INSERT INTO realisateurs SET ?', formDataReal, (err, results) => {
                             if (err) {
                                 return connection.rollback(_ => {
                                     res
-                                        .status(500)
-                                        .send(" error realisateur")
-                                    throw err
+                                    .status(500)
+                                    .send(" error from realisateur")
+                                throw err
                                 })
                             }
                         })
@@ -77,18 +72,16 @@ router.post('/video', (req, res) => {
 
                             const edit = results.filter(result => result.name == formDataEdit.name)
 
-                            console.log(edit.length)
                             if (edit.length !== 0) {
                                 joinObject.distributeurEditeur_idDistributeurEditeur = results
 
                             } else {
-                                console.log("yes")
                                 connection.query('INSERT INTO distributeurEditeur SET ?', formDataEdit, (err, results) => {
                                     if (err) {
                                         return connection.rollback(_ => {
                                             res
-                                                .status(500)
-                                                .send(" error distrib")
+                                            .status(500)
+                                            .send(" error from distributeur")
                                             throw err
                                         })
                                     }
@@ -102,7 +95,7 @@ router.post('/video', (req, res) => {
                             return connection.rollback(_ => {
                                 res
                                     .status(500)
-                                    .send(" error 3")
+                                    .send(" error from commit final")
                                 throw err
                             })
                         }
@@ -110,8 +103,6 @@ router.post('/video', (req, res) => {
                     res.status(200).json({ results: "send" })
                 })
             }
-            /*              connection.end()
-             */
         })
     })
 })

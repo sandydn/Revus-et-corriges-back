@@ -22,55 +22,46 @@ router.post('/events', (req, res) => {
     connection.beginTransaction(function (err) {
 
         if (err) { throw err }
-        console.log("here");
         
         connection.query('INSERT INTO importance SET ?', formDataImp, (err, results) => {
             if (err) {
                 return connection.rollback(_ => {
                     res
-                        .status(500)
-                        .send("error")
-                    throw err
+                    .status(500)
+                    .send("error from importance")
+                throw err
                 })
             } else {
                 joinObject.importance_idImportance = results.insertId
             }
         })
-        console.log("ici");
 
         connection.query('INSERT INTO events SET ?', formDataEvents, (err, results) => {
             if (err) {
-                
                 return connection.rollback(_ => {
                     res
-                        .status(500)
-                        .send(" erreur lors de l'insertion cinema")
+                    .status(500)
+                    .send(" erreur lors de l'insertion cinema")
                     throw err
                 })
             } else {
-                
                 joinObject.events_idEvent = results.insertId
-
-                console.log("hi");
             }
+
             connection.query('SELECT * FROM lieux', formDataLieux, (err, results) => {
-                console.log(results);
-                console.log({formDataLieux});
                 
                 const lieux = results.filter(result => result.name == formDataLieux.name)
 
-                console.log(lieux)
                 if (lieux.length !== 0) {
                     joinObject.lieux_idLieux = lieux.idLieux
 
-                    console.log("yolo");
                 } else {
                     connection.query('INSERT INTO lieux SET ?', formDataLieux, (err, results) => {
                         if (err) {
                             return connection.rollback(_ => {
                                 res
                                 .status(500)
-                                .send(" error realisateur")
+                                .send(" error from realisateur")
                                 throw err
                             })
                         }
@@ -81,7 +72,7 @@ router.post('/events', (req, res) => {
                             return connection.rollback(_ => {
                                 res
                                     .status(500)
-                                    .send(" error 3")
+                                    .send(" error final commit")
                                 throw err
                             })
                         }
