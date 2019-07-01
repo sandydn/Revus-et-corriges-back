@@ -1,58 +1,21 @@
-const Acteurs = require("./Acteurs")
-const ActeursHasCinema = require("./ActeursHasCinema")
-const ActeursHasEvents = require("./ActeursHasEvents")
-const ActeurHasRealisateurs = require("./ActeursHasRealisateurs")
-const ActeursHasVideo = require("./ActeursHasVideo")
-const Admin = require("./Admin")
-const Auth = require("../auth/AuthController")
-const Cinema = require("./Cinema")
-const CinemaHasDistributeurEditeur = require("./CinemaHasDistributeurEditeur")
-const CinemaHasLieux = require("./CinemaHasLieux")
-const CinemaHasRealisateurs = require("./CinemaHasRealisateurs")
-const Decoration = require("./Decoration")
-const DistributeurEditeur = require("./DistributeurEditeur")
-const Events = require("./Events")
-const EventsHasLieux = require("./EventsHasLieux")
-const EventsHasRealisateurs = require("./EventsHasRealisateurs")
-const Importance = require("./Importance")
-const Lieux = require("./Lieux")
-const RcEvents = require("./RcEvents")
-const RcEventsHasActeurs = require("./RcEventsHasActeurs")
-const RcEventsHasCinema = require("./RcEventsHasCinema")
-const RcEventsHasLieux = require("./RcEventsHasLieux")
-const RcEventsHasRealisateurs = require("./RcEventsHasRealisateurs")
-const Realisateurs = require("./Realisateurs")
-const Video = require("./Video")
-const VideoEditeur = require("./VideoEditeur")
-const VideoHasRealisateurs = require("./VideoHasRealisateurs")
-
+const Admin = require('./Admin')
+const Contact = require('./Contact')
+const Contact_has_video = require('./Contact_has_video')
+const Decoration = require('./Decoration')
+const Event = require('./Event')
+const Event_has_contact = require('./Event_has_contact')
+const Lieux = require('./Lieux')
+const Video = require('./Video')
+const Video_has_event = require('./Video_has_event')
 
 module.exports = {
-    Acteurs, 
-    ActeursHasCinema, 
-    ActeursHasEvents, 
-    ActeurHasRealisateurs,
-    ActeursHasVideo,
-    Admin,
-    Auth, 
-    Cinema, 
-    CinemaHasDistributeurEditeur, 
-    CinemaHasLieux, 
-    CinemaHasRealisateurs, 
-    Decoration, 
-    DistributeurEditeur, 
-    Events, 
-    EventsHasLieux, 
-    EventsHasRealisateurs, 
-    Importance,
-    Lieux, 
-    RcEvents,
-    RcEventsHasActeurs,
-    RcEventsHasCinema,
-    RcEventsHasLieux,
-    RcEventsHasRealisateurs,
-    Realisateurs, 
-    Video, 
-    VideoEditeur,
-    VideoHasRealisateurs
- }
+  Admin,
+  Contact,
+  Contact_has_video,
+  Decoration,
+  Event,
+  Event_has_contact,
+  Lieux,
+  Video,
+  Video_has_event
+}
