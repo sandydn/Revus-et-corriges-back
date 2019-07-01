@@ -3,8 +3,11 @@ const connection = require('../conf')
 
 const router = express.Router()
 
+
 router.get('/video', (req, res) => {
   connection.query('SELECT * FROM video', (err, results) => {
+    console.log(err);
+    
     if (err)
       res.status(500).send('Erreur lors de la recuperation')
     else
