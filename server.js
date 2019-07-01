@@ -5,6 +5,7 @@ const routes = require('./Routes/index');
 const bodyParser = require('body-parser');
 const port = 4000;
 
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({
     extended: true
