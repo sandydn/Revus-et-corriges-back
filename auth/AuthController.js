@@ -6,9 +6,9 @@ const connection = require('../conf');
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('./config');
+const jwt = require('jsonwebtoken');
 const VerifyToken = require('./VerifyToken');
 
 
@@ -19,7 +19,7 @@ router.post('/register', (req, res) => {
   const hashedPassword = bcrypt.hashSync(req.body.admin_password, 8);
 
   const values = [req.body.admin_email, hashedPassword, req.body.name]
-  connection.query('INSERT INTO admin (admin_email, admin_password,name) VALUES (?,?,?)', values, (err, user) => {
+  connection.query('INSERT INTO admin (admin_email, admin_password, name) VALUES (?,?,?)', values, (err, user) => {
     console.log(req.body)
     if (err) return res.status(500).send("There was a problem registering the user.")
     // create a token
