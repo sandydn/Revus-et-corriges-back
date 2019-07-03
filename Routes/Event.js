@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const VerifyToken = require('../auth/VerifyToken');
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.get('/event', (req, res) => {
   })
 })
 
-router.post('/event', (req, res) => {
+router.post('/event', VerifyToken, (req, res) => {
   const formData = req.body
   connection.query('INSERT INTO event SET ?', formData, err => {
     if (err)
@@ -22,7 +23,7 @@ router.post('/event', (req, res) => {
   })
 })
 
-router.put('/event/:id', (req, res) => {
+router.put('/event/:id', VerifyToken, (req, res) => {
   const idevent = req.params.id
   const formData = req.body
   connection.query('UPDATE event SET ? WHERE idevent = ?', [formData, idevent], err => {
@@ -33,7 +34,7 @@ router.put('/event/:id', (req, res) => {
   })
 })
 
-router.delete('/event/:id', (req, res) => {
+router.delete('/event/:id', VerifyToken, (req, res) => {
   const idevent = req.params.id
   connection.query('DELETE FROM event WHERE idevent = ?', idevent, err => {
     if (err)

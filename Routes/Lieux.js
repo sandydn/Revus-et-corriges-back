@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const VerifyToken = require('../auth/VerifyToken');
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.get('/lieux', (req, res) => {
   })
 })
 
-router.post('/lieux', (req, res) => {
+router.post('/lieux', VerifyToken, (req, res) => {
   const formData = req.body
   connection.query('INSERT INTO lieux SET ?', formData, err => {
     if (err)
@@ -22,7 +23,7 @@ router.post('/lieux', (req, res) => {
   })
 })
 
-router.put('/lieux/:id', (req, res) => {
+router.put('/lieux/:id', VerifyToken, (req, res) => {
   const idlieux = req.params.id
   const formData = req.body
   connection.query('UPDATE lieux SET ? WHERE idlieux = ?', [formData, idlieux], err => {
@@ -33,7 +34,7 @@ router.put('/lieux/:id', (req, res) => {
   })
 })
 
-router.delete('/lieux/:id', (req, res) => {
+router.delete('/lieux/:id', VerifyToken, (req, res) => {
   const idlieux = req.params.id
   connection.query('DELETE FROM lieux WHERE idlieux = ?', idlieux, err => {
     if (err)

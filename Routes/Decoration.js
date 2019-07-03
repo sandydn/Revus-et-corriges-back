@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const VerifyToken = require('../auth/VerifyToken');
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.get('/decoration', (req, res) => {
   })
 })
 
-router.post('/decoration', (req, res) => {
+router.post('/decoration', VerifyToken, (req, res) => {
   const formData = req.body
   connection.query('INSERT INTO decoration SET ?', formData, err => {
     if (err)
@@ -22,7 +23,7 @@ router.post('/decoration', (req, res) => {
   })
 })
 
-router.put('/decoration/:id', (req, res) => {
+router.put('/decoration/:id', VerifyToken, (req, res) => {
   const iddecoration = req.params.id
   const formData = req.body
   connection.query('UPDATE decoration SET ? WHERE iddecoration = ?', [formData, iddecoration], err => {
@@ -33,7 +34,7 @@ router.put('/decoration/:id', (req, res) => {
   })
 })
 
-router.delete('/decoration/:id', (req, res) => {
+router.delete('/decoration/:id', VerifyToken, (req, res) => {
   const iddecoration = req.params.id
   connection.query('DELETE FROM decoration WHERE iddecoration = ?', iddecoration, err => {
     if (err)

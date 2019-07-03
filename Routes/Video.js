@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const VerifyToken = require('../auth/VerifyToken');
 
 const router = express.Router()
 
@@ -16,7 +17,7 @@ router.get('/video', (req, res) => {
 })
 
 
-router.post('/video', (req, res) => {
+router.post('/video', VerifyToken, (req, res) => {
   const formData = req.body
   connection.query('INSERT INTO video SET ?', formData, err => {
     if (err)
@@ -26,7 +27,7 @@ router.post('/video', (req, res) => {
   })
 })
 
-router.put('/video/:id', (req, res) => {
+router.put('/video/:id', VerifyToken, (req, res) => {
   const idvideo = req.params.id
   const formData = req.body
   connection.query('UPDATE video SET ? WHERE idvideo = ?', [formData, idvideo], err => {
@@ -37,7 +38,7 @@ router.put('/video/:id', (req, res) => {
   })
 })
 
-router.delete('/video/:id', (req, res) => {
+router.delete('/video/:id', VerifyToken, (req, res) => {
   const idvideo = req.params.id
   connection.query('DELETE FROM video WHERE idvideo = ?', idvideo, err => {
     if (err)

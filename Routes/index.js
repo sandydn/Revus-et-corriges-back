@@ -1,4 +1,5 @@
 const Admin = require('./Admin')
+const Auth = require('../auth/AuthController')
 const Contact = require('./Contact')
 const Contact_has_video = require('./Contact_has_video')
 const Decoration = require('./Decoration')
@@ -10,6 +11,7 @@ const Video_has_event = require('./Video_has_event')
 
 module.exports = {
   Admin,
+  Auth,
   Contact,
   Contact_has_video,
   Decoration,

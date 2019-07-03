@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require('../conf')
+const VerifyToken = require('../auth/VerifyToken');
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.get('/contact', (req, res) => {
   })
 })
 
-router.post('/contact', (req, res) => {
+router.post('/contact', VerifyToken, (req, res) => {
   const formData = req.body
   connection.query('INSERT INTO contact SET ?', formData, err => {
     if (err)
@@ -22,7 +23,7 @@ router.post('/contact', (req, res) => {
   })
 })
 
-router.put('/contact/:id', (req, res) => {
+router.put('/contact/:id', VerifyToken, (req, res) => {
   const idcontact = req.params.id
   const formData = req.body
   connection.query('UPDATE contact SET ? WHERE idcontact = ?', [formData, idcontact], err => {
@@ -33,7 +34,7 @@ router.put('/contact/:id', (req, res) => {
   })
 })
 
-router.delete('/contact/:id', (req, res) => {
+router.delete('/contact/:id', VerifyToken, (req, res) => {
   const idcontact = req.params.id
   connection.query('DELETE FROM contact WHERE idcontact = ?', idcontact, err => {
     if (err)
