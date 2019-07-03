@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-
+app.use('/auth', route.Auth)
 app.use('/a1', routes.Admin)
 app.use('/a2', routes.Contact)
 app.use('/a3', routes.Contact_has_video)
